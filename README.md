@@ -23,7 +23,7 @@ planète de l'en-tête).
 Univers du *Petit Prince*, découpé depuis `theme.png` : la planète aux deux
 volcans en en-tête (deux volcans, deux filles), le réverbère pour le vendredi,
 le renard pour le samedi, l'avion pour le dimanche, le puits pour les infos
-pratiques, et un motif par carte. Palette papier crème / ocre / terre cuite /
+pratiques. Palette papier crème / ocre / terre cuite /
 feuillage, titres en serif, texte en sans-serif système.
 
 En mode sombre, l'en-tête devient un ciel étoilé (les étoiles sont en CSS, pas
@@ -41,9 +41,9 @@ python3 outils/decoupe_motifs.py
 sa licence. Le dépôt étant public, vérifie qu'elle autorise la republication si
 l'image provient d'une banque d'images.
 
-## Les trois trous à compléter
+## Les deux trous à compléter
 
-Ils portent tous le même commentaire dans `index.html` :
+Ils portent le même commentaire dans `index.html` :
 
 ```bash
 grep -n "À COMPLÉTER" index.html
@@ -51,10 +51,13 @@ grep -n "À COMPLÉTER" index.html
 
 1. **Lien de la carte Pizzayoloo** (samedi 19h15) — remplacer `href="#"` et
    retirer la classe `todo`.
-2. **Numéro de téléphone** (carte « Nous joindre ») — remplacer `href="tel:"`
-   par `href="tel:+336XXXXXXXX"`, remplacer le texte affiché, retirer `todo`.
-3. **Carte « Sur place »** (draps et serviettes, parking, tenue) — déjà écrite
+2. **Carte « Sur place »** (draps et serviettes, parking, tenue) — déjà écrite
    mais masquée : compléter les trois lignes puis supprimer l'attribut `hidden`.
+
+La section « Infos pratiques » ne contient plus que les trois adresses : les
+cartes « À apporter », « Bon à savoir » et « Nous joindre » ont été retirées.
+Trois motifs (écharpe, mouton, étoiles) restent donc dans `img/` sans être
+utilisés — ils sont prêts si une carte revient.
 
 ## Publier / mettre à jour
 
@@ -97,9 +100,8 @@ s'éteindrait.
 
 ## Vérifier avant d'envoyer le lien
 
-- [ ] Les trois `À COMPLÉTER` sont traités (ou assumés tels quels).
+- [ ] Les deux `À COMPLÉTER` sont traités (ou assumés tels quels).
 - [ ] Les liens Maps ouvrent la bonne adresse depuis un téléphone.
-- [ ] Le lien `tel:` déclenche l'appel.
 - [ ] `Ctrl+P` : le programme tient sur une page.
 
 Aperçu local :
