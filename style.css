@@ -16,8 +16,6 @@
   --sage:      #5F7343;
   --terra:     #A9482A;
   --gold:      #C79218;
-  --alert-bg:  #F6E5C4;
-  --alert-tx:  #7A4310;
   --header-bg: #F3ECD6;
   --radius:    14px;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
@@ -36,8 +34,6 @@
     --sage:      #AFC191;
     --terra:     #E5915F;
     --gold:      #E9B84A;
-    --alert-bg:  #3A2A16;
-    --alert-tx:  #F2C88F;
     --header-bg: #10131F;   /* ciel de nuit */
   }
 }
@@ -200,7 +196,7 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
   position: absolute;
   left: calc(var(--col) + var(--gap) / 2);
   margin-left: -5.5px;
-  top: .5rem;
+  top: .37rem;
   width: 11px; height: 11px;
   border-radius: 50%;
   background: var(--gold);
@@ -210,6 +206,8 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
 .time {
   margin: 0;
   font-size: 1.2rem;
+  line-height: 1.42rem;   /* = la boîte de ligne du h3 voisin, pour aligner
+                             l'heure, la pastille et le titre */
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--terra);
@@ -222,7 +220,6 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
   text-transform: uppercase;
   letter-spacing: .07em;
   color: var(--sage);
-  padding-top: .22rem;
 }
 
 .body h3 { font-size: 1.18rem; margin-bottom: .25em; }
@@ -244,7 +241,6 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
 
 .maplink { display: inline-block; margin-top: .2rem; font-weight: 600; font-size: .95rem; }
 .maplink::after { content: " ›"; }
-.todo { opacity: .75; }
 
 /* ---------- Deux options du samedi ---------- */
 .options { margin-top: 1rem; }
@@ -279,26 +275,19 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
 }
 .mini span { font-weight: 700; color: var(--terra); font-variant-numeric: tabular-nums; }
 
-.alert {
-  background: var(--alert-bg);
-  color: var(--alert-tx) !important;
-  border-radius: 10px;
-  padding: .7rem .85rem;
-  font-size: .95rem;
-  margin: 0 0 .6rem;
-}
-.alert strong { color: inherit; }
-.alert::before { content: "⚠ "; }
 
 .places { list-style: none; margin: .6rem 0 .8rem; padding: 0; clear: both; }
 .places li {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .2rem .7rem;
+  align-items: baseline;
   padding: .45rem 0;
   border-bottom: 1px solid var(--border);
   font-size: .97rem;
 }
 .places li:last-child { border-bottom: none; }
-.dur { color: var(--sage); font-weight: 600; font-size: .88rem; white-space: nowrap; }
+.dur { color: var(--sage); font-weight: 600; font-size: .88rem; white-space: nowrap; text-align: right; }
 
 /* ---------- Infos pratiques ---------- */
 .cards { display: grid; gap: 1rem; }
@@ -378,8 +367,7 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
   @page { margin: 12mm; }
   :root {
     --bg: #fff; --surface: #fff; --surface-2: #fff; --header-bg: #fff; --border: #bbb;
-    --text: #000; --text-2: #222; --sage: #000; --terra: #000; --gold: #000;
-    --alert-bg: #fff; --alert-tx: #000;  }
+    --text: #000; --text-2: #222; --sage: #000; --terra: #000; --gold: #000;  }
   body { font-size: 9.5pt; line-height: 1.35; }
   .nav, .skip, .footer, .intro, .maplink, .stars, img { display: none !important; }
   .header { padding: 0 0 .4rem; border-bottom: 1px solid #000; text-align: left; }
@@ -395,7 +383,6 @@ main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
   .sub li, .card, .option { border: none; padding: 0; margin-bottom: .15rem; background: none; }
   .options { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
   .or { display: none; }
-  .alert { padding: 0; font-weight: 700; }
   .cards { grid-template-columns: 1fr 1fr; gap: .5rem; }
   a { text-decoration: none; color: #000; }
 }
