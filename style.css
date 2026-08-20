@@ -1,0 +1,418 @@
+/* ============================================================
+   Baptême civil d'Hélène & Agathe — 21-23 août 2026
+   Mobile first. Aucune dépendance, aucune police externe.
+   Motifs aquarelle découpés depuis theme.png (dossier img/).
+   ============================================================ */
+
+/* ---------- Palette : papier crème, ocre, terre cuite, feuillage ---------- */
+:root {
+  --bg:        #FAF5E4;
+  --surface:   #FFFCF1;
+  --surface-2: #F3ECD6;
+  --paper:     #F2ECD2;   /* halo derrière les motifs (voir thème sombre) */
+  --border:    #E2D7B8;
+  --text:      #2E2A1C;
+  --text-2:    #5D573F;
+  --sage:      #5F7343;
+  --sage-soft: #E8EBD8;
+  --terra:     #A9482A;
+  --gold:      #C79218;
+  --alert-bg:  #F6E5C4;
+  --alert-tx:  #7A4310;
+  --header-bg: #F3ECD6;
+  --radius:    14px;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #16150E;
+    --surface:   #201E14;
+    --surface-2: #282519;
+    --paper:     #EFE7CE;
+    --border:    #3C3826;
+    --text:      #F0E9D5;
+    --text-2:    #B5AD93;
+    --sage:      #AFC191;
+    --sage-soft: #2A311D;
+    --terra:     #E5915F;
+    --gold:      #E9B84A;
+    --alert-bg:  #3A2A16;
+    --alert-tx:  #F2C88F;
+    --header-bg: #10131F;   /* ciel de nuit */
+  }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;   /* hauteur de la nav collante */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;         /* 17 px */
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4 { font-family: var(--serif); line-height: 1.2; margin: 0 0 .4em; font-weight: 600; }
+p { margin: 0 0 .8em; }
+p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+img { max-width: 100%; height: auto; }
+
+a { color: var(--terra); text-underline-offset: .18em; }
+a:focus-visible {
+  outline: 3px solid var(--sage);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--sage); color: var(--bg);
+  padding: .6rem 1rem; border-radius: 0 0 var(--radius) 0; z-index: 20;
+}
+.skip:focus { left: 0; top: 0; }
+
+/* ---------- Motifs aquarelle ---------- */
+.motif { display: block; height: 46px; width: auto; }
+/* Sur fond sombre, les motifs dont l'aquarelle utilise la couleur du papier
+   (la laine du mouton, le fond du puits, le verre de la cloche) ont besoin
+   d'un halo de papier pour rester lisibles. Les autres s'en passent. */
+@media (prefers-color-scheme: dark) {
+  .motif--paper, .hero {
+    background: radial-gradient(closest-side ellipse,
+      rgba(239,231,206,.93), rgba(239,231,206,.6) 68%, rgba(239,231,206,0) 100%);
+  }
+}
+
+/* ---------- En-tête ---------- */
+.header {
+  position: relative;
+  padding: 1.6rem 1.15rem 1.9rem;
+  text-align: center;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+/* champ d'étoiles, uniquement de nuit */
+.stars { display: none; }
+@media (prefers-color-scheme: dark) {
+  .stars {
+    display: block;
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.6px 1.6px at 12% 22%, #FFF3D0 50%, transparent 51%),
+      radial-gradient(1.4px 1.4px at 78% 14%, #FFE9B0 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 33% 68%, #FFF3D0 50%, transparent 51%),
+      radial-gradient(1.8px 1.8px at 88% 55%, #FFE9B0 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 58% 30%, #FFF3D0 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 22% 82%, #FFE9B0 50%, transparent 51%),
+      radial-gradient(1.1px 1.1px at 68% 78%, #FFF3D0 50%, transparent 51%),
+      radial-gradient(1.3px 1.3px at 45% 8%, #FFE9B0 50%, transparent 51%);
+    opacity: .75;
+  }
+}
+.header > *:not(.stars) { position: relative; }
+
+.hero {
+  display: block;
+  height: 128px; width: auto;
+  margin: 0 auto .7rem;
+}
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--sage);
+  margin-bottom: .35rem;
+}
+.header h1 { font-size: clamp(2.1rem, 10vw, 3rem); margin-bottom: .3rem; }
+.dates { font-weight: 600; margin-bottom: .1em; }
+.place { color: var(--text-2); margin-bottom: 1rem; }
+.intro { max-width: 34ch; margin: 0 auto; color: var(--text-2); font-size: .98rem; }
+
+/* ---------- Navigation collante ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav ul { display: flex; margin: 0; padding: 0; list-style: none; }
+.nav li { flex: 1 1 0; }
+.nav a {
+  display: block;
+  padding: .85rem .2rem;
+  text-align: center;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+.nav a[aria-current="true"] { color: var(--terra); border-bottom-color: var(--terra); }
+
+/* ---------- Sections ---------- */
+main { max-width: 46rem; margin: 0 auto; padding: 0 1.15rem 1rem; }
+.day, .infos { padding-top: 2.2rem; }
+.day h2, .infos h2 {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  font-size: 1.75rem;
+  margin-bottom: 1.2rem;
+}
+.day h2 .motif, .infos h2 .motif { height: 52px; flex: none; }
+.day-num { color: var(--sage); }
+.day-date { color: var(--text-2); font-size: .95rem; font-family: var(--sans); font-weight: 500; }
+
+/* ---------- Timeline ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; }
+
+.event {
+  --col: 4.4rem;      /* colonne des heures */
+  --gap: 1.05rem;     /* gouttière : filet + pastille */
+  display: grid;
+  grid-template-columns: var(--col) 1fr;
+  column-gap: var(--gap);
+  position: relative;
+  padding-bottom: 1.6rem;
+}
+.event::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--col) + var(--gap) / 2);
+  margin-left: -1px;
+  top: .9rem; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.event:last-child::before { display: none; }
+.event::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--col) + var(--gap) / 2);
+  margin-left: -5.5px;
+  top: .5rem;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+.time {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--terra);
+  text-align: right;
+  letter-spacing: -.01em;
+}
+.time--word {
+  font-size: .9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--sage);
+  padding-top: .22rem;
+}
+
+.body h3 { font-size: 1.18rem; margin-bottom: .25em; }
+.body > p { color: var(--text-2); }
+.body > p strong, .sub strong { color: var(--text); }
+
+.sub { list-style: none; margin: .7rem 0 0; padding: 0; }
+.sub li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .7rem .85rem;
+  margin-bottom: .5rem;
+  font-size: .97rem;
+  color: var(--text-2);
+}
+
+.note { font-size: .92rem; color: var(--text-2); font-style: italic; }
+
+.maplink { display: inline-block; margin-top: .2rem; font-weight: 600; font-size: .95rem; }
+.maplink::after { content: " ›"; }
+.todo { opacity: .75; }
+
+/* ---------- Deux options du samedi ---------- */
+.options { margin-top: 1rem; }
+.option {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--terra);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.option--b { border-left-color: var(--sage); }
+.motif--opt { float: right; height: 54px; margin: -.2rem -.2rem .4rem .7rem; }
+.option-tag {
+  font-size: .78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--terra); margin-bottom: .25rem;
+}
+.option--b .option-tag { color: var(--sage); }
+.option h4 { font-size: 1.1rem; margin-bottom: .5rem; }
+.option p { color: var(--text-2); font-size: .97rem; }
+
+.or {
+  text-align: center; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em;
+  font-size: .8rem; color: var(--text-2); margin: .8rem 0;
+}
+
+.mini { list-style: none; margin: 0 0 .8rem; padding: 0; }
+.mini li {
+  display: grid; grid-template-columns: 3.6rem 1fr; gap: .5rem;
+  padding: .18rem 0; font-size: .97rem; color: var(--text-2);
+}
+.mini span { font-weight: 700; color: var(--terra); font-variant-numeric: tabular-nums; }
+
+.alert {
+  background: var(--alert-bg);
+  color: var(--alert-tx) !important;
+  border-radius: 10px;
+  padding: .7rem .85rem;
+  font-size: .95rem;
+  margin: 0 0 .6rem;
+}
+.alert strong { color: inherit; }
+.alert::before { content: "⚠ "; }
+
+.places { list-style: none; margin: .6rem 0 .8rem; padding: 0; clear: both; }
+.places li {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem;
+  padding: .45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .97rem;
+}
+.places li:last-child { border-bottom: none; }
+.dur { color: var(--sage); font-weight: 600; font-size: .88rem; white-space: nowrap; }
+
+/* ---------- Infos pratiques ---------- */
+.cards { display: grid; gap: 1rem; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+}
+.card h3 { font-size: 1.2rem; color: var(--sage); }
+.card p { color: var(--text-2); }
+.card strong { color: var(--text); }
+.motif--card { float: right; height: 56px; margin: -.2rem -.2rem .5rem .8rem; }
+
+.addr { list-style: none; margin: 0; padding: 0; }
+.addr li {
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: .97rem;
+}
+.addr li:first-child { padding-top: 0; }
+.addr li:last-child { border-bottom: none; padding-bottom: 0; }
+
+.check { list-style: none; margin: 0; padding: 0; clear: both; }
+.check li { position: relative; padding: .35rem 0 .35rem 1.6rem; color: var(--text-2); font-size: .97rem; }
+.check li::before {
+  content: "✓";
+  position: absolute; left: 0; top: .35rem;
+  color: var(--sage); font-weight: 700;
+}
+
+.card--contact { background: var(--sage-soft); border-color: var(--sage); }
+.phone {
+  display: inline-block;
+  background: var(--terra);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Pied de page ---------- */
+.footer {
+  margin-top: 2.5rem;
+  padding: 1.6rem 1.15rem 2.4rem;
+  text-align: center;
+  color: var(--text-2);
+  font-size: .95rem;
+  border-top: 1px solid var(--border);
+}
+.motif--foot { height: 62px; margin: 0 auto .6rem; }
+
+/* ---------- Écrans larges ---------- */
+@media (min-width: 40rem) {
+  .event { --col: 6rem; --gap: 1.4rem; }
+  .time { font-size: 1.35rem; }
+  .hero { height: 172px; }
+  .cards { grid-template-columns: 1fr 1fr; }
+  .cards .card:first-child { grid-column: 1 / -1; }
+  .addr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .addr li { border-bottom: none; padding: 0; }
+}
+
+@media (min-width: 48rem) {
+  .options {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .or { align-self: center; margin: 0; }
+}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ---------- Impression : le programme sur une page ---------- */
+@media print {
+  @page { margin: 12mm; }
+  :root {
+    --bg: #fff; --surface: #fff; --surface-2: #fff; --header-bg: #fff; --border: #bbb;
+    --text: #000; --text-2: #222; --sage: #000; --terra: #000; --gold: #000;
+    --alert-bg: #fff; --alert-tx: #000; --sage-soft: #fff;
+  }
+  body { font-size: 9.5pt; line-height: 1.35; }
+  .nav, .skip, .footer, .intro, .maplink, .stars, img { display: none !important; }
+  .header { padding: 0 0 .4rem; border-bottom: 1px solid #000; text-align: left; }
+  .header h1 { font-size: 17pt; }
+  .kicker { font-size: 8pt; margin-bottom: .1rem; }
+  main { max-width: none; padding: 0; }
+  .day, .infos { padding-top: .5rem; break-inside: avoid; }
+  .day h2, .infos h2 { font-size: 12pt; margin-bottom: .3rem; }
+  .event { padding-bottom: .3rem; --col: 3.4rem; --gap: .6rem; break-inside: avoid; }
+  .event::before, .event::after { display: none; }
+  .time { font-size: 10pt; }
+  .body h3 { font-size: 10pt; margin-bottom: 0; }
+  .sub li, .card, .option { border: none; padding: 0; margin-bottom: .15rem; background: none; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .or { display: none; }
+  .alert { padding: 0; font-weight: 700; }
+  .cards { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .card--contact { background: none; }
+  .phone { background: none; color: #000; padding: 0; font-size: 10pt; }
+  a { text-decoration: none; color: #000; }
+}
